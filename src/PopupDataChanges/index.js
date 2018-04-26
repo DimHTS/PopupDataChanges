@@ -14,10 +14,14 @@ class PopupDataChanges extends Component {
   componentDidUpdate() {
     if (this.props.isActive) {
       const that = this;
-      setTimeout(() => {
+      this.isTimeout = setTimeout(() => {
         that.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
       }, this.closingTime);
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.isTimeout) // отменяем изменение состояния родителя в случае перехода на другой url
   }
 
   handleClosePopup = () => {
