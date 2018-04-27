@@ -15,18 +15,14 @@ class Parent extends Component {
   
   onChangeData_edit() => {
     // ...
-    this.setState({ 
-      isPopupDataChanges_delete: false,
-      isPopupDataChanges_edit: true 
-    })
+    this.handleClose__PopupDataChanges()
+    this.setState({ isPopupDataChanges_edit: true })
   }
   
   onChangeData_delete() => {
     // ...
-    this.setState({ 
-      isPopupDataChanges_edit: false,
-      isPopupDataChanges_delete: true
-    })
+    this.handleClose__PopupDataChanges()
+    this.setState({ isPopupDataChanges_delete: true })
   }
   
   handleClose__PopupDataChanges = () => {
