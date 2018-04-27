@@ -22,6 +22,8 @@ class PopupDataChanges extends Component {
         this.setState({ activeSetTimeout: false });
         this.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
       }, this.closingTime);
+    } else if (!this.props.isActive) {
+      clearTimeout(this.isTimeout)
     }
   }
 
@@ -93,5 +95,6 @@ class PopupDataChanges extends Component {
     )
   }
 }
+
 
 export default PopupDataChanges
