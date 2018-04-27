@@ -15,14 +15,20 @@ class PopupDataChanges extends Component {
     this.optionsComponent();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (Boolean(nextProps.isActive) === Boolean(this.props.isActive)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   componentDidUpdate() {
-    if ((this.props.isActive) && (!this.state.activeSetTimeout)) {
-      this.setState({ activeSetTimeout: true });
+    if (this.props.isActive) {
       this.isTimeout = setTimeout(() => {
-        this.setState({ activeSetTimeout: false });
         this.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
       }, this.closingTime);
-    } else if (!this.props.isActive) {
+    } else {
       clearTimeout(this.isTimeout)
     }
   }
