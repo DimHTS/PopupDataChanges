@@ -8,20 +8,25 @@ class PopupDataChanges extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      activeSetTimeout: false // для того чтобы setTimeout не вызвался после перехода на другую страницу
+    }
+
     this.optionsComponent();
   }
 
   componentDidUpdate() {
-    if (this.props.isActive) {
-      const that = this;
+    if ((this.props.isActive) && (!this.state.activeSetTimeout)) {
+      this.setState({ activeSetTimeout: true });
       this.isTimeout = setTimeout(() => {
-        that.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
+        this.setState({ activeSetTimeout: false });
+        this.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
       }, this.closingTime);
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.isTimeout) // отменяем изменение состояния родителя в случае перехода на другой url
+    clearTimeout(this.isTimeout)
   }
 
   handleClosePopup = () => {
@@ -88,7 +93,5 @@ class PopupDataChanges extends Component {
     )
   }
 }
-
-
 
 export default PopupDataChanges
