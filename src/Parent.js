@@ -1,101 +1,41 @@
 import React, { Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import './index.css'
+//Component
+import PopupDataChanges from './PopupDataChanges'
 
-
-class PopupDataChanges extends Component {
+class Parent extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      activeSetTimeout: false // для того чтобы setTimeout не вызвался после перехода на другую страницу
-    }
-
-    this.optionsComponent();
-  }
-
-  componentDidUpdate() {
-    if ((this.props.isActive) && (!this.state.activeSetTimeout)) {
-      this.setState({ activeSetTimeout: true });
-      this.isTimeout = setTimeout(() => {
-        this.setState({ activeSetTimeout: false });
-        this.props.handleClosePopup(); // сигнализируем родителю о том что компонент закрылся
-      }, this.closingTime);
-    } else if (!this.props.isActive) {
-      clearTimeout(this.isTimeout)
+      isPopupDataChanges: false
     }
   }
-
-  componentWillUnmount() {
-    clearTimeout(this.isTimeout)
+  
+  onChangeData() => {
+    // ...
+    this.setState({ isPopupDataChanges: true })
   }
-
-  handleClosePopup = () => {
-    this.props.handleClosePopup();
+  
+  handleClose__PopupDataChanges = () => {
+    this.setState({ isPopupDataChanges: false })
   }
-
-  optionsComponent = () => {
-    // this.props.typeDataChanges = 'add', 'edit', 'delete'
-    // в зависимости от типа меняем цвета и текст
-
-    this.closingTime = 2000;
-    this.textPopup = 'Данные изменены';
-    this.additionalStyle = {
-      color: 'black',
-      backgroundColor: 'palegoldenrod'
-    }
-
-    if (this.props.typeDataChanges === 'add') {
-      this.textPopup = 'Запись добавлена!'
-      this.additionalStyle = {
-        color: 'black',
-        backgroundColor: 'palegreen'
-      }
-    } else if (this.props.typeDataChanges === 'edit') {
-      this.textPopup = 'Изменения сохранены!'
-      this.additionalStyle = {
-        color: 'black',
-        backgroundColor: 'skyblue'
-      }
-    } else if (this.props.typeDataChanges === 'delete') {
-      this.textPopup = 'Запись удалена!'
-      this.additionalStyle = {
-        color: 'rgb(238, 255, 0)',
-        backgroundColor: 'rgb(238, 77, 77)'
-      }
-    }
-
-    // если (текст || цвет || фон) задан в компоненте тогда отображаем его
-    Boolean(this.props.textPopup) && (this.formText = this.props.textPopup)
-    Boolean(this.props.color) && (this.additionalStyle.color = this.props.color)
-    Boolean(this.props.backgroundColor) && (this.additionalStyle.backgroundColor = this.props.backgroundColor)
-
-    // время закрытия окна
-    Boolean(this.props.closingTime) && (this.closingTime = this.props.closingTime)
-  }
-
+  
   render() {
     return (
-      <ReactCSSTransitionGroup
-        transitionName="animationPopupDataChanges"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300} >
-
-        {this.props.isActive ?
-          <div className="popupAdd" style={this.additionalStyle} >
-            <span onClick={this.handleClosePopup} className="closePopupAdd" />
-            {this.textPopup}
-          </div>
-          :
-          null
-        }
-
-      </ReactCSSTransitionGroup>
+      <div>
+        <PopupDataChanges
+          isActive={this.state.isPopupDataChanges}
+          // typeDataChanges='edit'
+          // color="red"
+          // backgroundColor="blue"
+          // textPopup="Данные измен."
+          // closingTime='1300'
+          handleClosePopup={this.handleClose__PopupDataChanges} />
+      </div>
     )
   }
 }
 
 
-
-export default PopupDataChanges
+export default Parent;
