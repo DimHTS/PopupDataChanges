@@ -73,7 +73,7 @@ class PopupDataChanges extends Component {
     }
 
     // если (текст || цвет || фон) задан в компоненте тогда отображаем его
-    Boolean(this.props.textPopup) && (this.formText = this.props.textPopup)
+    Boolean(this.props.textPopup) && (this.textPopup = this.props.textPopup)
     Boolean(this.props.color) && (this.additionalStyle.color = this.props.color)
     Boolean(this.props.backgroundColor) && (this.additionalStyle.backgroundColor = this.props.backgroundColor)
 
