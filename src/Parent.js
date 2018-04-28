@@ -14,6 +14,7 @@ class Parent extends Component {
   
   onChangeData() => {
     // ...
+    this.handleClose__PopupDataChanges()
     this.setState({ isPopupDataChanges: true })
   }
   
