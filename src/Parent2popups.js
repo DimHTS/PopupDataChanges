@@ -9,7 +9,7 @@ class Parent extends Component {
 
     this.state = {
       isPopupDataChanges_edit: false,
-      isPopupDataChanges_delete: false,
+      isPopupDataChanges_delete: false
     }
   }
   
