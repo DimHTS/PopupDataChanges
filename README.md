@@ -19,3 +19,17 @@ React component: PopupDataChanges
     closingTime='300'
     handleClosePopup={this.handleClose__PopupDataChanges} />
 ```
+
+
+Рекомендации:
+
+для корректной работы компонента(а именно повторного отрытия попапа), изменение состояния в родительском компоненте должно происходить асинхронно:
+
+пример заглушки:
+```
+  setTimeout(() => {
+    this.handleClose__PopupDataChanges()
+    this.setState({ isPopupDataChanges_edit: true })
+  })
+```
+
