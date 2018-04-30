@@ -8,10 +8,6 @@ class PopupDataChanges extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      activeSetTimeout: false // для того чтобы setTimeout не вызвался после перехода на другую страницу
-    }
-
     this.optionsComponent();
   }
 
