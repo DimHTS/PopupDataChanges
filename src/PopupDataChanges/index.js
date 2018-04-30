@@ -12,11 +12,7 @@ class PopupDataChanges extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (Boolean(nextProps.isActive) === Boolean(this.props.isActive)) {
-      return false
-    } else {
-      return true
-    }
+    return (Boolean(nextProps.isActive) === Boolean(this.props.isActive)) ? false : true
   }
 
   componentDidUpdate() {
